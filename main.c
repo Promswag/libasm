@@ -6,7 +6,7 @@
 /*   By: gbaumgar <gbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 17:48:39 by gbaumgar          #+#    #+#             */
-/*   Updated: 2024/03/21 18:39:01 by gbaumgar         ###   ########.fr       */
+/*   Updated: 2024/03/21 18:50:04 by gbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int main(int argc, char **argv) {
 	
 	int i = -1;
 	while (ft__strlen_test[++i]) {
-		printf("% 15s | C-strlen % 4lu | ASM-ft__strlen % 4lu\n",
+		printf("%15s | C-strlen %4lu | ASM-ft__strlen %4lu\n",
 			   ft__strlen_test[i],
 			   strlen(ft__strlen_test[i]),
 			   ft__strlen(ft__strlen_test[i]));
