@@ -6,12 +6,14 @@
 /*   By: gbaumgar <gbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 17:48:45 by gbaumgar          #+#    #+#             */
-/*   Updated: 2024/03/19 17:56:45 by gbaumgar         ###   ########.fr       */
+/*   Updated: 2024/03/21 16:44:34 by gbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBASM_H
 # define LIBASM_H
+
+#include <unistd.h>
 
 size_t	ft__strlen(const char *s);
 char	*ft__strcpy(char *dest, const char *src);
