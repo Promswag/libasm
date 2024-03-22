@@ -7,7 +7,8 @@ OBJS	= ${SRC:%.s=${OUT_DIR}%.o}
 
 ASM		= nasm -f elf64
 CC		= gcc
-CFLAGS	= 
+CFLAGS	= -Wall -Wextra -Werror
+# CFLAGS 	+= -fsanitize=address
 AR		= ar rcs
 RM		= rm -rf
 MKDIR	= mkdir -p
@@ -22,10 +23,10 @@ ${NAME}: ${OBJS}
 	
 ${OUT_DIR}%.o: %.s
 	@${MKDIR} ${@D}
-	${ASM} $< -o $@
+	${ASM} $< -o -g $@
 	
 eval: ${NAME}
-	${CC} -o ${OUT} ${MAIN} ${NAME}
+	${CC} ${CFLAGS} -o ${OUT} ${MAIN} ${NAME}
 	
 test: eval
 	${RUN}
