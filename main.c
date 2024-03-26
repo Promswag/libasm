@@ -6,7 +6,7 @@
 /*   By: gbaumgar <gbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 17:48:39 by gbaumgar          #+#    #+#             */
-/*   Updated: 2024/03/22 17:17:55 by gbaumgar         ###   ########.fr       */
+/*   Updated: 2024/03/26 17:16:16 by gbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int main(int argc, char **argv) {
 		// "Je t'aime",
 		// "Un peu",
 		// "Beaucoup",
+		// "Passionement",
 		// "A la folie",
 		0,
 	};
@@ -62,7 +63,7 @@ int main(int argc, char **argv) {
 	char p2[] = "p";
 	char p3[] = "AAAAA";
 	char p4[] = "xDxDxD";
-	char t[13];
+	char t[8];
 	char t2[8];
 	char t3[8];
 	char t4[8];
@@ -73,4 +74,20 @@ int main(int argc, char **argv) {
 	printf("%15s\n", ft__strcpy(t4, p4));
 	// printf("%15s\n", strcpy(t, p));
 	
+	
+	printf("%15i\n", ft__strcmp("a", "a"));
+	printf("%15i\n", ft__strcmp("a", "b"));
+	printf("%15i\n", ft__strcmp("b", "a"));
+	printf("%15i\n", ft__strcmp("aa", "a"));
+	printf("%15i\n", ft__strcmp("aa", "aa"));
+	printf("%15i\n", ft__strcmp("a", "aa"));
+	printf("%15i\n", ft__strcmp("", "Test"));
+	printf("\n\n");
+	printf("%15i\n", strcmp("a", "a"));
+	printf("%15i\n", strcmp("a", "b"));
+	printf("%15i\n", strcmp("b", "a"));
+	printf("%15i\n", strcmp("aa", "a"));
+	printf("%15i\n", strcmp("aa", "aa"));
+	printf("%15i\n", strcmp("a", "aa"));
+	printf("%15i\n", strcmp("", "Test"));
 }

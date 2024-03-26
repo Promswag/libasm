@@ -6,8 +6,8 @@ ft__strcpy:
 loop:
     cmp BYTE [rsi + rax], 0
     je end
-    mov rcx, [rsi + rax]
-    mov [rdi + rax], rcx
+    mov cl, [rsi + rax]
+    mov [rdi + rax], cl
     inc rax
     jmp loop
     

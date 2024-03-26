@@ -2,7 +2,10 @@ NAME	= libasm.a
 OUT_DIR	= ./obj/
 
 MAIN	= main.c
-SRC		= ft__strlen.s ft__strcpy.s
+SRC		=	ft__strlen.s \
+			ft__strcpy.s \
+			ft__strcmp.s
+			
 OBJS	= ${SRC:%.s=${OUT_DIR}%.o}
 
 ASM		= nasm -f elf64
@@ -23,7 +26,7 @@ ${NAME}: ${OBJS}
 	
 ${OUT_DIR}%.o: %.s
 	@${MKDIR} ${@D}
-	${ASM} $< -o -g $@
+	${ASM} $< -o $@
 	
 eval: ${NAME}
 	${CC} ${CFLAGS} -o ${OUT} ${MAIN} ${NAME}

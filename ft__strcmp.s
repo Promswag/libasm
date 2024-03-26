@@ -1,18 +1,21 @@
-global ft__strcpy
+global ft__strcmp
 
-ft__strcpy:
-    xor rax, rax
+ft__strcmp:
+    xor rcx, rcx
     
 loop:
-    cmp BYTE [rsi + rax], 0
+    movzx rax, BYTE [rdi + rcx]
+    movzx rdx, BYTE [rsi + rcx]
+    cmp rax, rdx
+    je if_equal
+
+end:
+    sub rax, rdx 
+    ret
+    
+if_equal:
+    cmp rdx, 0
     je end
-    mov rcx, [rsi + rax]
-    mov [rdi + rax], rcx
-    inc rax
+    inc rcx
     jmp loop
     
-end:
-    mov BYTE [rdi + rax], 0
-    mov rax, rdi
-    mov rcx, 0
-    ret
