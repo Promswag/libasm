@@ -1,3 +1,4 @@
 obj
 libasm.a
-libasm.out
+a.out
+test_file

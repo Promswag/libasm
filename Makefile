@@ -4,7 +4,10 @@ OUT_DIR	= ./obj/
 MAIN	= main.c
 SRC		=	ft__strlen.s \
 			ft__strcpy.s \
-			ft__strcmp.s
+			ft__strcmp.s \
+			ft__write.s \
+			ft__read.s \
+			ft__strdup.s
 			
 OBJS	= ${SRC:%.s=${OUT_DIR}%.o}
 
@@ -15,7 +18,7 @@ CFLAGS	= -Wall -Wextra -Werror
 AR		= ar rcs
 RM		= rm -rf
 MKDIR	= mkdir -p
-OUT		= libasm.out
+OUT		= a.out
 RUN		= ./${OUT}
 
 
