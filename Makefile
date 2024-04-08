@@ -2,14 +2,19 @@ NAME	= libasm.a
 OUT_DIR	= ./obj/
 
 MAIN	= main.c
-SRC		=	ft__strlen.s \
+BMAIN	= main_bonus.c
+SRCS		=	ft__strlen.s \
 			ft__strcpy.s \
 			ft__strcmp.s \
 			ft__write.s \
 			ft__read.s \
 			ft__strdup.s
 			
-OBJS	= ${SRC:%.s=${OUT_DIR}%.o}
+BSRCS	=	${SRCS} \
+			ft__atoi_base.s
+			
+OBJS	= ${SRCS:%.s=${OUT_DIR}%.o}
+BOBJS	= ${BSRCS:%.s=${OUT_DIR}%.o}
 
 ASM		= nasm -f elf64
 CC		= gcc
@@ -27,6 +32,9 @@ all: ${NAME}
 ${NAME}: ${OBJS}
 	${AR} ${NAME} ${OBJS}
 	
+bonus:	${BOBJS}
+	${AR} ${NAME} ${BOBJS}
+	
 ${OUT_DIR}%.o: %.s
 	@${MKDIR} ${@D}
 	${ASM} $< -o $@
@@ -34,7 +42,13 @@ ${OUT_DIR}%.o: %.s
 eval: ${NAME}
 	${CC} ${CFLAGS} -o ${OUT} ${MAIN} ${NAME}
 	
+beval: bonus
+	${CC} ${CFLAGS} -o ${OUT} ${BMAIN} ${NAME}
+
 test: eval
+	${RUN}
+	
+btest: beval
 	${RUN}
 	
 clean:
