@@ -5,7 +5,7 @@ ft__atoi_base:
 	; rdi str, rsi base
 	; usable rax rcx rdx r8-r11
 	
-	# Check if len is valid 
+	; Check if len is valid
 	push	rdi
 	mov		rdi, rsi
 	call	ft__strlen
@@ -13,18 +13,21 @@ ft__atoi_base:
 	pop		rdi
 	jl		exit_error
 	
-	# Check if base is valid
+	; Check if base is valid
 	call	base_validator	
 	cmp		rax, 0
 	je		exit_error
 	
-	# Whitespace Handler
+	; Whitespace Handler
 	xor		rcx, rcx
 	call	whitespace_handler
 	
-	# Sign Handler
-	xor		rdx, rdx
+	; Sign Handler
+	mov		rdx, 1
 	call	sign_handler
+	
+	; Start A to I
+	jmp		converter
 	
 converter: 
 	; rax = result
@@ -32,22 +35,59 @@ converter:
 	; rsi = base
 	; rcx = i
 	; rdx = sign
-	; r8 = j
-	; r9 = size
+	; r8 = size
+	; r9 = j
 	; r10 = is_in_base
+	; r11 = tmp
+	
 	xor		r8, r8
 	xor		r9, r9
 	xor		r10, r10
 	
-	# Put size of ( str + i ) in r9
+	; Put size of base in r8
 	push	rdi
-	lea		rdi, [rdi + rcx]
+	mov		rdi, rsi
 	call	ft__strlen
-	mov		r9, rax
+	mov		r8, rax
 	pop		rdi
 	
+	push	rdx
 	xor		rax, rax
 
+converter_outer_loop:
+	xor		r9, r9
+	xor		r10, r10
+	
+converter_inner_loop:
+	mov		r11b, [rdi + rcx]
+	cmp		r11b, [rsi + r9]
+	jne		converter_end_loop
+	jmp		converter_operation
+	
+converter_operation:
+	mul		r8
+	add		rax, r9
+	mov		r10, 1
+	jmp		converter_end_loop
+
+converter_end_loop:
+	inc		r9
+	cmp		BYTE [rsi + r9], 0
+	jne		converter_inner_loop 
+
+	cmp		r10, 0
+	je		end
+	
+	inc		rcx
+	cmp		BYTE [rdi + rcx], 0
+	jne		converter_outer_loop
+	
+	jmp		end
+	
+end:
+	pop		rdx
+	mul		rdx
+	ret
 	
 exit_error:
 	xor		rax, rax
@@ -91,29 +131,30 @@ base_validator_end:
 	ret
 	
 whitespace_handler:
-	cmp		[rdi + rcx], ' '
+	cmp		BYTE [rdi + rcx], 9
 	je		whitespace_handler_loop
-	cmp		[rdi + rcx], '\f'
+	cmp		BYTE [rdi + rcx], 10
 	je		whitespace_handler_loop
-	cmp		[rdi + rcx], '\n'
+	cmp		BYTE [rdi + rcx], 11
 	je		whitespace_handler_loop
-	cmp		[rdi + rcx], '\r'
+	cmp		BYTE [rdi + rcx], 12
 	je		whitespace_handler_loop
-	cmp		[rdi + rcx], '\t'
+	cmp		BYTE [rdi + rcx], 13
 	je		whitespace_handler_loop
-	cmp		[rdi + rcx], '\v'
+	cmp		BYTE [rdi + rcx], 32
 	je		whitespace_handler_loop
 	ret
 
-whitespace_handler_loop
+whitespace_handler_loop:
 	inc		rcx
 	jmp		whitespace_handler
 	
 sign_handler:
-	cmp		[rdi + rcx], '-'
+	cmp		BYTE [rdi + rcx], '-'
 	je		sign_handler_loop_minus
-	cmp		[rdi + rcx], '+'
+	cmp		BYTE [rdi + rcx], '+'
 	je		sign_handler_loop_plus
+	ret
 
 sign_handler_loop_minus:
 	inc		rcx

@@ -11,7 +11,11 @@ SRCS		=	ft__strlen.s \
 			ft__strdup.s
 			
 BSRCS	=	${SRCS} \
-			ft__atoi_base.s
+			ft__atoi_base.s \
+			ft__list_push_front.s \
+			ft__list_size.s \
+			ft__list_sort.s \
+			ft__list_remove_if.s 
 			
 OBJS	= ${SRCS:%.s=${OUT_DIR}%.o}
 BOBJS	= ${BSRCS:%.s=${OUT_DIR}%.o}
@@ -19,7 +23,7 @@ BOBJS	= ${BSRCS:%.s=${OUT_DIR}%.o}
 ASM		= nasm -f elf64
 CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror
-# CFLAGS 	+= -fsanitize=address
+CFLAGS 	+= -fsanitize=address
 AR		= ar rcs
 RM		= rm -rf
 MKDIR	= mkdir -p
