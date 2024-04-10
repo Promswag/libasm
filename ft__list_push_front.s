@@ -1,17 +1,18 @@
 global	ft__list_push_front
 extern	malloc
 
-
 ft__list_push_front:
 	; rdi = list ptr ptr
 	; rsi = data ptr
 	push	rdi
+	push	rsi
 	mov		rdi, 16
 	call	malloc WRT ..plt
+	pop		rsi
 	pop		rdi
 
-	cmp		rax, 0
-	je		end
+	test	rax, rax
+	jz		end
 	
 	mov		[rax], rsi
 	mov		rdx, [rdi]
@@ -20,4 +21,3 @@ ft__list_push_front:
 	
 end:
 	ret
-	

@@ -22,7 +22,7 @@ BOBJS	= ${BSRCS:%.s=${OUT_DIR}%.o}
 
 ASM		= nasm -f elf64
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -g -Wall -Wextra -Werror
 CFLAGS 	+= -fsanitize=address
 AR		= ar rcs
 RM		= rm -rf
@@ -41,7 +41,7 @@ bonus:	${BOBJS}
 	
 ${OUT_DIR}%.o: %.s
 	@${MKDIR} ${@D}
-	${ASM} $< -o $@
+	${ASM} $< -g -o $@
 	
 eval: ${NAME}
 	${CC} ${CFLAGS} -o ${OUT} ${MAIN} ${NAME}

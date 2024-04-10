@@ -10,6 +10,10 @@ ft__strdup:
 	mov		rdi, rax
 	call	malloc WRT ..plt
 	pop		rsi
+	cmp		rax, 0
+	je		end
 	mov		rdi, rax
 	call	ft__strcpy
+	ret	
+end:
 	ret
