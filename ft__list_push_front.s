@@ -4,6 +4,9 @@ extern	malloc
 ft__list_push_front:
 	; rdi = list ptr ptr
 	; rsi = data ptr
+	test	rdi, rdi
+	jz		end
+	
 	push	rdi
 	push	rsi
 	mov		rdi, 16

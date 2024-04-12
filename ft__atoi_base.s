@@ -5,6 +5,9 @@ ft__atoi_base:
 	; rdi str, rsi base
 	; usable rax rcx rdx r8-r11
 	
+	test	rsi, rsi	; check rsi for NULL
+	jz		exit_error
+	
 	; Check if len is valid
 	push	rdi
 	mov		rdi, rsi

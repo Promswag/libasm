@@ -6,7 +6,7 @@
 /*   By: gbaumgar <gbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 15:20:44 by gbaumgar          #+#    #+#             */
-/*   Updated: 2024/04/10 18:21:25 by gbaumgar         ###   ########.fr       */
+/*   Updated: 2024/04/12 19:15:10 by gbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ char	*ft__strdup(const char *s);
 int		ft__atoi_base(char *str, char *base);
 void	ft__list_push_front(t_list **begin_list, void *data);
 int		ft__list_size(t_list *begin_list);
-void	ft__list_sort(t_list *begin_list, int (*cmp)());
-void	ft__list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(), void (*free_fct)(void *));
+void	ft__list_sort(t_list **begin_list, int (*cmp)());
+void	*ft__list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(), void (*free_fct)(void *));
 
 
 #endif

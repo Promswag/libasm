@@ -21,8 +21,8 @@ OBJS	= ${SRCS:%.s=${OUT_DIR}%.o}
 BOBJS	= ${BSRCS:%.s=${OUT_DIR}%.o}
 
 ASM		= nasm -f elf64
-CC		= gcc
-CFLAGS	= -g -Wall -Wextra -Werror
+CC		= gcc -g
+# CFLAGS	= -g -Wall -Wextra -Werror
 CFLAGS 	+= -fsanitize=address
 AR		= ar rcs
 RM		= rm -rf
@@ -45,14 +45,10 @@ ${OUT_DIR}%.o: %.s
 	
 eval: ${NAME}
 	${CC} ${CFLAGS} -o ${OUT} ${MAIN} ${NAME}
+	${RUN}
 	
 beval: bonus
 	${CC} ${CFLAGS} -o ${OUT} ${BMAIN} ${NAME}
-
-test: eval
-	${RUN}
-	
-btest: beval
 	${RUN}
 	
 clean:
