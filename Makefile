@@ -3,19 +3,19 @@ OUT_DIR	= ./obj/
 
 MAIN	= main.c
 BMAIN	= main_bonus.c
-SRCS		=	ft__strlen.s \
-			ft__strcpy.s \
-			ft__strcmp.s \
-			ft__write.s \
-			ft__read.s \
-			ft__strdup.s
+SRCS	=	ft_strlen.s \
+			ft_strcpy.s \
+			ft_strcmp.s \
+			ft_write.s \
+			ft_read.s \
+			ft_strdup.s
 			
 BSRCS	=	${SRCS} \
-			ft__atoi_base.s \
-			ft__list_push_front.s \
-			ft__list_size.s \
-			ft__list_sort.s \
-			ft__list_remove_if.s 
+			ft_atoi_base.s \
+			ft_list_push_front.s \
+			ft_list_size.s \
+			ft_list_sort.s \
+			ft_list_remove_if.s 
 			
 OBJS	= ${SRCS:%.s=${OUT_DIR}%.o}
 BOBJS	= ${BSRCS:%.s=${OUT_DIR}%.o}

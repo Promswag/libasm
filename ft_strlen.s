@@ -1,6 +1,6 @@
-global	ft__strlen
+global	ft_strlen
 
-ft__strlen:
+ft_strlen:
 	xor		rax, rax
 
 loop:

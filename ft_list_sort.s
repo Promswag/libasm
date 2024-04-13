@@ -1,5 +1,5 @@
-global	ft__list_sort
-ft__list_sort:
+global	ft_list_sort
+ft_list_sort:
 	; rdi = t_list **begin_list
 	; rsi = int (*cmp)()
 	test	rdi, rdi		; rdi tested for null

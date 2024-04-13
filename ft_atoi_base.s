@@ -1,17 +1,17 @@
-global	ft__atoi_base
-extern	ft__strlen
+global	ft_atoi_base
+extern	ft_strlen
 
-ft__atoi_base:
+ft_atoi_base:
 	; rdi str, rsi base
 	; usable rax rcx rdx r8-r11
-	
+	; xor		rax, rax
 	test	rsi, rsi	; check rsi for NULL
 	jz		exit_error
 	
 	; Check if len is valid
 	push	rdi
 	mov		rdi, rsi
-	call	ft__strlen
+	call	ft_strlen
 	cmp		rax, 2
 	pop		rdi
 	jl		exit_error
@@ -50,7 +50,7 @@ converter:
 	; Put size of base in r8
 	push	rdi
 	mov		rdi, rsi
-	call	ft__strlen
+	call	ft_strlen
 	mov		r8, rax
 	pop		rdi
 	
@@ -106,6 +106,18 @@ base_validator_outer_loop:
 	cmp		BYTE [rsi + r8], '+'
 	je		base_validator_end
 	cmp		BYTE [rsi + r8], '-'
+	je		base_validator_end
+	cmp		BYTE [rsi + r8], 9
+	je		base_validator_end
+	cmp		BYTE [rsi + r8], 10
+	je		base_validator_end
+	cmp		BYTE [rsi + r8], 11
+	je		base_validator_end
+	cmp		BYTE [rsi + r8], 12
+	je		base_validator_end
+	cmp		BYTE [rsi + r8], 13
+	je		base_validator_end
+	cmp		BYTE [rsi + r8], 32
 	je		base_validator_end
 	xor		r9, r9
 	xor		r10, r10

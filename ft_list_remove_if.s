@@ -1,7 +1,7 @@
-global	ft__list_remove_if
+global	ft_list_remove_if
 extern	free
 
-ft__list_remove_if:
+ft_list_remove_if:
 	; rdi = **begin_list
 	; rsi = *data_ref
 	; rdx = int (*cmp)()

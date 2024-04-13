@@ -1,6 +1,6 @@
-global	ft__list_size
+global	ft_list_size
 
-ft__list_size:
+ft_list_size:
 	; rdi = list ptr
 	xor		rax, rax
 	push	rdi

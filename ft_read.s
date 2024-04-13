@@ -1,13 +1,13 @@
-global	ft__write
+global	ft_read
 extern	__errno_location
 
-ft__write:
-	mov		rax, 1
+ft_read:
+	mov		rax, 0
 	syscall
 	test	rax, rax
 	js		error
 	ret
-	
+
 error:
 	neg		rax
 	mov		rdi, rax

@@ -1,6 +1,6 @@
-global  ft__strcpy
+global  ft_strcpy
 
-ft__strcpy:
+ft_strcpy:
 	xor     rax, rax
 	
 loop:

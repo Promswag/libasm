@@ -6,7 +6,7 @@
 /*   By: gbaumgar <gbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 17:48:39 by gbaumgar          #+#    #+#             */
-/*   Updated: 2024/04/12 14:31:49 by gbaumgar         ###   ########.fr       */
+/*   Updated: 2024/04/13 20:47:10 by gbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct data {
 	char	*str;
 } t_data; 
 	
-void	test_ft__strlen(void) {
+void	test_ft_strlen(void) {
 	char *src[] = {
 		"Ceci",
 		"Est",
@@ -37,19 +37,19 @@ void	test_ft__strlen(void) {
 		0,
 	};
 	
-	char *s = "FT__STRLEN";
+	char *s = "ft_STRLEN";
 	printf("\n-------%*s%*s-------\n\n", (int)(20 + strlen(s) / 2), s, (int)(20 - strlen(s) / 2), "");
 	
 	int i = -1;
 	while (src[++i]) {
 		printf("%s\n", src[i]);
 		printf("%lu | C-strlen\n", strlen(src[i]));
-		printf("%lu | ASM-ft__strlen\n", ft__strlen(src[i]));
+		printf("%lu | ASM-ft_strlen\n", ft_strlen(src[i]));
 		printf("\n");
 	}
 }
 
-void	test_ft__strcpy(void) {
+void	test_ft_strcpy(void) {
 	char *src[] = {
 		"est-ce théière copine?",
 		"Inchalatte",
@@ -60,24 +60,24 @@ void	test_ft__strcpy(void) {
 		0,
 	};
 	char	dest[100];
-	char	ft__dest[100];
+	char	ft_dest[100];
 	
-	char *s = "FT__STRCPY";
+	char *s = "ft_STRCPY";
 	printf("\n-------%*s%*s-------\n\n", (int)(20 + strlen(s) / 2), s, (int)(20 - strlen(s) / 2), "");
 	
 	int i = -1;
 	while (src[++i]) {
 		strcpy(dest, src[i]);
-		ft__strcpy(ft__dest, src[i]);
+		ft_strcpy(ft_dest, src[i]);
 		printf("%s\n", src[i]);
 		printf("%s | C-strcpy\n", dest);
-		printf("%s | ASM-ft__strcpy\n", ft__dest);
+		printf("%s | ASM-ft_strcpy\n", ft_dest);
 		printf("\n");
 	}
 	
 }
 
-void	test_ft__strcmp(void) {
+void	test_ft_strcmp(void) {
 	char *src[][2] = {
 		{"a", "a"},
 		{"a", "b"},
@@ -94,17 +94,17 @@ void	test_ft__strcmp(void) {
 		{0}
 	};
 	
-	char *s = "FT__STRCMP";
+	char *s = "ft_STRCMP";
 	printf("\n-------%*s%*s-------\n\n", (int)(20 + strlen(s) / 2), s, (int)(20 - strlen(s) / 2), "");
 	
 	int i = -1;
 	while (*src[++i]) {
-		printf("%14s %25s | %4i | %-25s\n", "ASM-ft__strcmp", src[i][0], ft__strcmp(src[i][0], src[i][1]), src[i][1]);
+		printf("%14s %25s | %4i | %-25s\n", "ASM-ft_strcmp", src[i][0], ft_strcmp(src[i][0], src[i][1]), src[i][1]);
 		printf("%14s %25s | %4i | %-25s\n", "C-strcmp", src[i][0], strcmp(src[i][0], src[i][1]), src[i][1]);
 	}
 }
 
-void	test_ft__write(void) {
+void	test_ft_write(void) {
 	int fd = open("test_file", O_WRONLY | O_CREAT, 0700);
 	int fd2 = open("test_file2", O_RDWR | O_CREAT, 0700);
 	int fd3 = open("test_file3", O_RDONLY | O_CREAT, 0700);
@@ -121,27 +121,27 @@ void	test_ft__write(void) {
 		{fd3, "WRONG FLAGS"},
 	};
 	printf("%lu\n", sizeof(t_data));
-	char *s = "FT__WRITE";
+	char *s = "ft_WRITE";
 	printf("\n-------%*s%*s-------\n\n", (int)(20 + strlen(s) / 2), s, (int)(20 - strlen(s) / 2), "");
 		
-	int ret_write, ret_ft__write;
+	int ret_write, ret_ft_write;
 	int i = -1;
 	while (++i * sizeof(t_data) < sizeof(src)) {
-		ret_ft__write = ft__write((src[i].fd), src[i].str, ft__strlen(src[i].str));
-		if (ret_ft__write == -1)
+		ret_ft_write = ft_write((src[i].fd), src[i].str, ft_strlen(src[i].str));
+		if (ret_ft_write == -1)
 			printf("%s\n", strerror(errno));
 		errno = 0;
-		ret_write = write((src[i].fd), src[i].str, ft__strlen(src[i].str));
+		ret_write = write((src[i].fd), src[i].str, ft_strlen(src[i].str));
 		if (ret_write == -1)
 			printf("%s\n", strerror(errno));
-		printf("write: %5d | %-5d :ft__write\n", ret_write, ret_ft__write);
+		printf("write: %5d | %-5d :ft_write\n", ret_write, ret_ft_write);
 	}
 	close(fd);
 	close(fd2);
 	close(fd3);
 }
 
-void	test_ft__read(void) {
+void	test_ft_read(void) {
 	int fd = open("test_file", O_RDONLY | O_CREAT, 0700);
 	int fdr = open("test_file", O_RDONLY | O_CREAT, 0700);
 	int fd2 = open("test_file2", O_RDWR | O_CREAT, 0700);
@@ -167,18 +167,18 @@ void	test_ft__read(void) {
 		{fd3 | fdr3 << 4, small},
 	};
 	
-	char *s = "FT__READ";
+	char *s = "ft_READ";
 	printf("\n-------%*s%*s-------\n\n", (int)(20 + strlen(s) / 2), s, (int)(20 - strlen(s) / 2), "");
 	
-	int	ret_read = 0, ret_ft__read = 0;
+	int	ret_read = 0, ret_ft_read = 0;
 	int i = -1;
 	while (++i * sizeof(t_data) < sizeof(src)) {
-		ret_ft__read = ft__read((src[i].fd) & 15, src[i].str, 99);
-		if (ret_ft__read == -1)
+		ret_ft_read = ft_read((src[i].fd) & 15, src[i].str, 99);
+		if (ret_ft_read == -1)
 			printf("%s\n", strerror(errno));
 		else {
 			printf("%s\n", src[i].str);
-			bzero(src[i].str, ft__strlen(src[i].str));
+			bzero(src[i].str, ft_strlen(src[i].str));
 		}
 		errno = 0;
 		ret_read = read((src[i].fd) >> 4, src[i].str, 99);
@@ -186,10 +186,10 @@ void	test_ft__read(void) {
 			printf("%s\n", strerror(errno));
 		else {
 			printf("%s\n", src[i].str);
-			bzero(src[i].str, ft__strlen(src[i].str));
+			bzero(src[i].str, ft_strlen(src[i].str));
 		}
 		errno = 0;
-		printf("read: %5d | %-5d :ft__read\n", ret_read, ret_ft__read);
+		printf("read: %5d | %-5d :ft_read\n", ret_read, ret_ft_read);
 	}
 	close(fd);
 	close(fdr);
@@ -200,7 +200,7 @@ void	test_ft__read(void) {
 }
 	
 
-void	test_ft__strdup(void) {
+void	test_ft_strdup(void) {
 	char *src[] = {
 		"xd",
 		"pomme",
@@ -212,20 +212,20 @@ void	test_ft__strdup(void) {
 		0,
 	};
 	char	*dest;
-	char	*ft__dest;
+	char	*ft_dest;
 	
-	char *s = "FT__STRDUP";
+	char *s = "ft_STRDUP";
 	printf("\n-------%*s%*s-------\n\n", (int)(20 + strlen(s) / 2), s, (int)(20 - strlen(s) / 2), "");
 	
 	int i = -1;
 	while (src[++i]) {
 		dest = strdup(src[i]);
-		ft__dest = ft__strdup(src[i]);
-		printf("%s\n%s | C-strdup\n%s | ASM-ft__strdup\n\n", src[i], dest, ft__dest);
-		bzero(dest, ft__strlen(dest));
-		bzero(ft__dest, ft__strlen(ft__dest));
+		ft_dest = ft_strdup(src[i]);
+		printf("%s\n%s | C-strdup\n%s | ASM-ft_strdup\n\n", src[i], dest, ft_dest);
+		bzero(dest, ft_strlen(dest));
+		bzero(ft_dest, ft_strlen(ft_dest));
 		free(dest);
-		free(ft__dest);
+		free(ft_dest);
 	}
 }
 
@@ -233,12 +233,36 @@ int main(int argc, char **argv) {
 	(void)argc;
 	(void)argv;
 	
-	test_ft__strlen();
-	test_ft__strcpy();
-	test_ft__strcmp();
-	test_ft__write();
-	test_ft__read();
-	test_ft__strdup();
+	errno = 0;
+	
+	int p[2]; 
+	pipe(p);
+	close(p[1]);
+	pipe(p);
+	
+	// EFAULT;
+	// int r = -1;
+	// while (++r < 255) {
+	// 	errno = r;
+	// 	printf("%s\n", strerror(errno));
+	// }
+	// errno = 0;
+	int ret_ft_write = 0, ret_write = 0;
+	ret_ft_write = ft_write(p[1], 0, 1);
+	if (ret_ft_write == -1)
+		printf("%s\n", strerror(errno));
+	errno = 0;
+	ret_write = write(p[1], NULL, 1);
+	// printf("%d\n", errno);
+	if (ret_write == -1)
+		printf("%s\n", strerror(errno));
+	printf("write: %5d | %-5d :ft_write\n", ret_write, ret_ft_write);
+	// test_ft_strlen();
+	// test_ft_strcpy();
+	// test_ft_strcmp();
+	// test_ft_write();
+	// test_ft_read();
+	// test_ft_strdup();
 
 }
 

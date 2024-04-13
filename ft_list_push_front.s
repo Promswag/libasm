@@ -1,7 +1,7 @@
-global	ft__list_push_front
+global	ft_list_push_front
 extern	malloc
 
-ft__list_push_front:
+ft_list_push_front:
 	; rdi = list ptr ptr
 	; rsi = data ptr
 	test	rdi, rdi

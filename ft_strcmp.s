@@ -1,6 +1,6 @@
-global  ft__strcmp
+global  ft_strcmp
 
-ft__strcmp:
+ft_strcmp:
 	xor		rcx, rcx
 	
 loop:
