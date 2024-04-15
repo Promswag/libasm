@@ -9,7 +9,7 @@ ft_list_size:
 	
 loop:
 	inc		rax
-	mov		rdi, [rdi + 8]
+	mov		rdi, [rdi + 8]	;
 	test	rdi, rdi
 	jnz		loop	
 	

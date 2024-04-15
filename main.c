@@ -6,7 +6,7 @@
 /*   By: gbaumgar <gbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 17:48:39 by gbaumgar          #+#    #+#             */
-/*   Updated: 2024/04/15 14:26:24 by gbaumgar         ###   ########.fr       */
+/*   Updated: 2024/04/15 16:59:40 by gbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,7 @@ void	test_ft_read(void) {
 	int	ret_read = 0, ret_ft_read = 0;
 	int i = -1;
 	while (++i * sizeof(t_data) < sizeof(src)) {
-		ret_ft_read = ft_read((src[i].fd) & 15, src[i].str, 99);
+		ret_ft_read = ft_read((src[i].fd) & 15, src[i].str, 9);
 		if (ret_ft_read == -1)
 			printf("%s\n", strerror(errno));
 		else {
@@ -181,7 +181,7 @@ void	test_ft_read(void) {
 			bzero(src[i].str, ft_strlen(src[i].str));
 		}
 		errno = 0;
-		ret_read = read((src[i].fd) >> 4, src[i].str, 99);
+		ret_read = read((src[i].fd) >> 4, src[i].str, 9);
 		if (ret_read == -1)
 			printf("%s\n", strerror(errno));
 		else {
@@ -209,7 +209,6 @@ void	test_ft_strdup(void) {
 		"HAHAHAHAHHAHAHA",
 		"42",
 		"",
-		0,
 	};
 	char	*dest;
 	char	*ft_dest;
@@ -218,7 +217,7 @@ void	test_ft_strdup(void) {
 	printf("\n-------%*s%*s-------\n\n", (int)(20 + strlen(s) / 2), s, (int)(20 - strlen(s) / 2), "");
 	
 	int i = -1;
-	while (src[++i]) {
+	while (++i * sizeof(char*) < sizeof(src)) {
 		dest = strdup(src[i]);
 		ft_dest = ft_strdup(src[i]);
 		printf("%s\n%s | C-strdup\n%s | ASM-ft_strdup\n\n", src[i], dest, ft_dest);

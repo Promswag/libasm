@@ -50,7 +50,7 @@ loop:
 	pop		rcx
 	pop		rdx
 	
-	cmp		eax, 0
+	cmp		eax, 0			; cmp done on 32 bits, r14 returns an int
 	je		remove
 	
 	mov		rdx, rcx		; rdx = prev
@@ -97,7 +97,7 @@ next:
 	pop		r9
 	
 	mov		rdi, r9
-	call	free WRT ..plt
+	call	free WRT ..plt	
 	
 	pop		rcx
 	pop		rdx

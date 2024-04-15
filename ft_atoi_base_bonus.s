@@ -22,15 +22,12 @@ ft_atoi_base:
 	je		exit_error
 	
 	; Whitespace Handler
-	xor		rcx, rcx
+	xor		rcx, rcx			; zeroing i
 	call	whitespace_handler
 	
 	; Sign Handler
-	mov		rdx, 1
+	mov		rdx, 1				; init sign to 1 (*1, *-1)
 	call	sign_handler
-	
-	; Start A to I
-	jmp		converter
 	
 converter: 
 	; rax = result
@@ -47,49 +44,45 @@ converter:
 	xor		r9, r9
 	xor		r10, r10
 	
-	; Put size of base in r8
 	push	rdi
 	mov		rdi, rsi
 	call	ft_strlen
-	mov		r8, rax
+	mov		r8, rax;				; Put size of base in r8
 	pop		rdi
 	
-	push	rdx
-	xor		rax, rax
+	push	rdx						; store sign
+	xor		rax, rax				; result = 0
 
 converter_outer_loop:
-	xor		r9, r9
-	xor		r10, r10
+	xor		r9, r9					; reset j
+	xor		r10, r10				; reset is_in_base
 	
 converter_inner_loop:
-	mov		r11b, [rdi + rcx]
-	cmp		r11b, [rsi + r9]
+	mov		r11b, [rdi + rcx]		; cpy *(str + i) into low 8 bit registery r11b
+	cmp		r11b, [rsi + r9]		; cmp *(str + i) to *(base + j)
 	jne		converter_end_loop
-	jmp		converter_operation
 	
 converter_operation:
-	mul		r8
-	add		rax, r9
-	mov		r10, 1
+	mul		r8						; result *= size
+	add		rax, r9					; result += j
+	mov		r10, 1					; is_in_base = true
 	jmp		converter_end_loop
 
 converter_end_loop:
-	inc		r9
-	cmp		BYTE [rsi + r9], 0
-	jne		converter_inner_loop 
+	inc		r9						; j++
+	cmp		BYTE [rsi + r9], 0		; cmp *(base + j) to 0
+	jne		converter_inner_loop 	;
 
-	cmp		r10, 0
-	je		end
+	cmp		r10, 0					; if is_inbase == false
+	je		end						; jmp to end
 	
-	inc		rcx
-	cmp		BYTE [rdi + rcx], 0
-	jne		converter_outer_loop
-	
-	jmp		end
+	inc		rcx						; i++;
+	cmp		BYTE [rdi + rcx], 0		; cmp *(str + i) to 0
+	jne		converter_outer_loop	
 	
 end:
-	pop		rdx
-	mul		rdx
+	pop		rdx						; restore sign
+	mul		rdx						; result *= sign
 	ret
 	
 exit_error:
@@ -97,10 +90,10 @@ exit_error:
 	ret
 
 base_validator:
-	xor		rax, rax
-	xor		r8, r8
-	xor		r9, r9
-	xor		r10, r10
+	xor		rax, rax				; zeroing rax, base invalid
+	xor		r8, r8					; i
+	xor		r9, r9					; j
+	xor		r10, r10				; count
 	
 base_validator_outer_loop:
 	cmp		BYTE [rsi + r8], '+'
@@ -119,28 +112,28 @@ base_validator_outer_loop:
 	je		base_validator_end
 	cmp		BYTE [rsi + r8], 32
 	je		base_validator_end
-	xor		r9, r9
-	xor		r10, r10
+	xor		r9, r9						; reset j
+	xor		r10, r10					; reset count
 	
 base_validator_inner_loop:
-	mov		r12b, [rsi + r8]
-	cmp		r12b, [rsi + r9]
-	jne		base_validator_loop_end
-	inc		r10
+	mov		r12b, [rsi + r8]			; cpy *(base + i) into low 8 bit registery r12b
+	cmp		r12b, [rsi + r9]			; cmp with *(base + j)
+	jne		base_validator_loop_end		; if not equal, skips count++
+	inc		r10							; count++
 
 base_validator_loop_end:	
-	cmp		r10, 1
-	jg		base_validator_end
+	cmp		r10, 1						; cmp count with 1
+	jg		base_validator_end			; if more than 1, means doublons
 	
-	inc		r9
-	cmp		BYTE [rsi + r9], 0
-	jne		base_validator_inner_loop
+	inc		r9							; j++
+	cmp		BYTE [rsi + r9], 0			; cmp *(base + j) to 0
+	jne		base_validator_inner_loop	; if not 0, jmp inner_loop
 	
-	inc		r8
-	cmp		BYTE [rsi + r8], 0
-	jne		base_validator_outer_loop
-	
-	mov		rax, 1
+	inc		r8							; i++
+	cmp		BYTE [rsi + r8], 0			; cmp *(base + i) to 0
+	jne		base_validator_outer_loop	; if not 0, jmp outer_loop
+
+	mov		rax, 1						; base is valid
 
 base_validator_end:
 	ret
@@ -161,7 +154,7 @@ whitespace_handler:
 	ret
 
 whitespace_handler_loop:
-	inc		rcx
+	inc		rcx				; i++
 	jmp		whitespace_handler
 	
 sign_handler:
@@ -172,10 +165,10 @@ sign_handler:
 	ret
 
 sign_handler_loop_minus:
-	inc		rcx
-	neg		rdx
+	inc		rcx				; i++
+	neg		rdx				; rdx *= -1
 	jmp		sign_handler
 	
 sign_handler_loop_plus:
-	inc		rcx
+	inc		rcx				; i++
 	jmp		sign_handler
