@@ -6,7 +6,7 @@
 /*   By: gbaumgar <gbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 17:48:39 by gbaumgar          #+#    #+#             */
-/*   Updated: 2024/04/13 20:47:10 by gbaumgar         ###   ########.fr       */
+/*   Updated: 2024/04/15 14:26:24 by gbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,36 +233,11 @@ int main(int argc, char **argv) {
 	(void)argc;
 	(void)argv;
 	
-	errno = 0;
-	
-	int p[2]; 
-	pipe(p);
-	close(p[1]);
-	pipe(p);
-	
-	// EFAULT;
-	// int r = -1;
-	// while (++r < 255) {
-	// 	errno = r;
-	// 	printf("%s\n", strerror(errno));
-	// }
-	// errno = 0;
-	int ret_ft_write = 0, ret_write = 0;
-	ret_ft_write = ft_write(p[1], 0, 1);
-	if (ret_ft_write == -1)
-		printf("%s\n", strerror(errno));
-	errno = 0;
-	ret_write = write(p[1], NULL, 1);
-	// printf("%d\n", errno);
-	if (ret_write == -1)
-		printf("%s\n", strerror(errno));
-	printf("write: %5d | %-5d :ft_write\n", ret_write, ret_ft_write);
-	// test_ft_strlen();
-	// test_ft_strcpy();
-	// test_ft_strcmp();
-	// test_ft_write();
-	// test_ft_read();
-	// test_ft_strdup();
-
+	test_ft_strlen();
+	test_ft_strcpy();
+	test_ft_strcmp();
+	test_ft_write();
+	test_ft_read();
+	test_ft_strdup();
 }
 

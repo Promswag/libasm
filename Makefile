@@ -11,18 +11,18 @@ SRCS	=	ft_strlen.s \
 			ft_strdup.s
 			
 BSRCS	=	${SRCS} \
-			ft_atoi_base.s \
-			ft_list_push_front.s \
-			ft_list_size.s \
-			ft_list_sort.s \
-			ft_list_remove_if.s 
+			ft_atoi_base_bonus.s \
+			ft_list_push_front_bonus.s \
+			ft_list_size_bonus.s \
+			ft_list_sort_bonus.s \
+			ft_list_remove_if_bonus.s 
 			
 OBJS	= ${SRCS:%.s=${OUT_DIR}%.o}
 BOBJS	= ${BSRCS:%.s=${OUT_DIR}%.o}
 
 ASM		= nasm -f elf64
 CC		= gcc -g
-# CFLAGS	= -g -Wall -Wextra -Werror
+CFLAGS	= -g -Wall -Wextra -Werror
 CFLAGS 	+= -fsanitize=address
 AR		= ar rcs
 RM		= rm -rf
